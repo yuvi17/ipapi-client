@@ -1,0 +1,5 @@
+# mac_os files
+.DS_Store
+
+# built gem
+ipapi-client-*.gem
