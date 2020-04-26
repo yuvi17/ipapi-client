@@ -18,7 +18,7 @@ https://ipstack.com/documentation
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'transaction'
+gem 'ipstack_client'
 ```
 
 And then execute:
@@ -27,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install transaction
+    $ gem install ipstack_client
 
 
 ## CONFIGURATION
