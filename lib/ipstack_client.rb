@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'redis'
-require 'json'
 require 'ipstack_client/api_interface'
+require 'ipstack_client/cacher'
 
 module IpstackClient
   def self.configure
@@ -59,7 +59,6 @@ module IpstackClient
   end
 
   class Lookup
-
     def initialize
       @api_key = IpstackClient.api_key
       raise StandardError.new('API Key not specified') unless @api_key
@@ -70,12 +69,14 @@ module IpstackClient
         @cache_period = IpstackClient.cache_period
       end
       @enable_https = IpstackClient.enable_https
+      @cacher = IpstackClient::Cacher.new(@redis, @enable_caching, @cache_period)
     end
 
     def geoip_data ip
-      puts "Hello"
-      interface = IpstackClient::ApiInterface.new(ip, @api_key, @enable_https)
-      interface.geoip_data
+      @cacher.find(ip) do
+        interface = IpstackClient::ApiInterface.new(ip, @api_key, @enable_https)
+        interface.geoip_data
+      end
     end
   end
 end
