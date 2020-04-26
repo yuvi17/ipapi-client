@@ -30,7 +30,9 @@ module IpstackClient
   end
 
   def self.enable_caching
-    @enable_caching ||= true
+    return @enable_caching unless @enable_caching.nil?
+
+    @enable_caching = true
   end
 
   def self.cache_period=(period)
@@ -55,7 +57,9 @@ module IpstackClient
   end
 
   def self.enable_https
-    @enable_https = true if @enable_https.nil?
+    return @enable_https unless @enable_https.nil?
+
+    @enable_https = true
   end
 
   class Lookup

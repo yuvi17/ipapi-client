@@ -11,15 +11,17 @@ module IpstackClient
     end
 
     def find(ip)
-      yield unless @enable_caching
+      if @enable_caching
+        geoip_data =  @redis_client.get(ip)
+        return JSON.parse(geoip_data) if geoip_data
 
-      geoip_data =  @redis_client.get(ip)
-      return JSON.parse(geoip_data) if geoip_data
-
-      geoip_data = yield
-      @redis_client.set(ip, geoip_data.to_json, ex: @cache_period) if geoip_data[:success]
-        
-      geoip_data
+        geoip_data = yield
+        @redis_client.set(ip, geoip_data.to_json, ex: @cache_period) if geoip_data[:success]
+          
+        geoip_data
+      else
+        yield
+      end
     end
   end
 end
