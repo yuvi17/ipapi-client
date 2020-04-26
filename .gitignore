@@ -2,4 +2,4 @@
 .DS_Store
 
 # built gem
-ipstack-client-*.gem
+ipstack_client-*.gem

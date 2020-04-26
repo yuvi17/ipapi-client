@@ -2,9 +2,9 @@
 
 require 'redis'
 require 'json'
-require 'api_interface.rb'
+require 'ipstack_client/api_interface'
 
-class IpstackClient
+module IpstackClient
   def self.configure
     yield self
   end
@@ -58,7 +58,7 @@ class IpstackClient
     @enable_https = true if @enable_https.nil?
   end
 
-  class CountryLookup
+  class Lookup
 
     def initialize
       @api_key = IpstackClient.api_key
@@ -74,9 +74,8 @@ class IpstackClient
 
     def geoip_data ip
       puts "Hello"
-      interface = ApiInterface.new(ip, @api_key, @enable_https)
+      interface = IpstackClient::ApiInterface.new(ip, @api_key, @enable_https)
       interface.geoip_data
     end
-
   end
 end
