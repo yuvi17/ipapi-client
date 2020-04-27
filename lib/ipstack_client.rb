@@ -30,7 +30,7 @@ module IpstackClient
   end
 
   def self.enable_caching
-    return @enable_caching unless @enable_caching
+    return @enable_caching if @enable_caching
 
     @enable_caching = false
   end
@@ -57,7 +57,7 @@ module IpstackClient
   end
 
   def self.enable_https
-    return @enable_https unless @enable_https
+    return @enable_https if @enable_https
 
     @enable_https = false
   end
