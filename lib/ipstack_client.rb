@@ -9,20 +9,15 @@ module IpstackClient
     yield self
   end
 
-  def self.redis=(hash = {})
+  def self.redis=(redis)
     return unless @enable_caching
 
-    @redis = if hash.instance_of?(Redis)
-               hash
-             else
-               Redis.new(hash)
-             end
+    @redis = redis
   end
 
   def self.redis
     return unless @enable_caching
-    # use default redis if not set
-    @redis ||= Redis.new
+    @redis
   end
 
   def self.enable_caching=(enable_caching)

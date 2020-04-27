@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'ipstack_client'
-  spec.version     = '0.0.2'
+  spec.version     = '0.0.3'
   spec.date        = '2020-04-25'
   spec.summary     = "IPStack Client for Ruby"
   spec.description = "A simple Ruby Client Interface for accessing GEOIP services of IPStack"
